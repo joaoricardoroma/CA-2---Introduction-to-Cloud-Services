@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create S3 Bucket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #0f4c75;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-size: 1.2em;
+            color: #0f4c75;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            text-align: center;
+            font-size: 1.1em;
+            color: #0f4c75;
+        }
+        .flash-messages {
+            color: red;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .rules {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .rules ul {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create S3 Bucket</h1>
+        <div class="flash-messages">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <form action="{{ url_for('create_bucket_route') }}" method="post">
+            <label for="bucket_name">Bucket Name:</label>
+            <input type="text" id="bucket_name" name="bucket_name" required>
+            <input type="submit" value="Create Bucket">
+        </form>
+        <div class="rules">
+            <h2>Bucket Naming Rules:</h2>
+            <ul>
+                <li>Bucket names must be between 3 and 63 characters long.</li>
+                <li>Bucket names can contain lowercase letters, numbers, hyphens, and periods.</li>
+                <li>Bucket names must start and end with a lowercase letter or number.</li>
+                <li>Bucket names cannot be formatted as IP addresses (e.g., 192.168.1.1).</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

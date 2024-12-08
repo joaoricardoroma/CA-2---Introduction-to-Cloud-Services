@@ -186,18 +186,19 @@
 
 <!-- Navigation Bar -->
 <nav>
-    <a href="#about">Cloud Services</a>
+    <a href="https://eu-west-2.console.aws.amazon.com/console/services?region=eu-west-2#">Cloud Services</a>
     <a href="https://github.com/joaoricardoroma/CA-2---Introduction-to-Cloud-Services" target="_blank">Report</a>
-    <a href="#contact">Student</a>
+    <a href="https://github.com/joaoricardoroma">Student</a>
 </nav>
 
 <!-- Features Section -->
 <section id="features">
-    <h2>Key Features</h2>
+    <h2>CA 2 Cloud Computing Fundamentals</h2>
     <div class="features">
         <div class="feature-box">
-            <h3>S3 bucket</h3>
-            <p>Create, Upload, and manage files in the cloud</p>
+            <h3>S3 Bucket</h3>
+            <p><a href="{{ url_for('create_bucket_route') }}">Create</a>, <a href="{{ url_for('upload_file') }}">Upload</a>, <a href="{{ url_for('manage_bucket') }}">Manage files in the cloud</a></p>
+
         </div>
         <div class="feature-box">
             <h3>VPC</h3>

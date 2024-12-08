@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Bucket</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #0f4c75;
+            margin-bottom: 1em;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 0.5em 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bucket-name {
+            flex-grow: 1;
+            text-align: left;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .button {
+            text-decoration: none;
+            color: white;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 0.5em;
+        }
+
+        .manage-button {
+            background-color: #007BFF;
+        }
+
+        .manage-button:hover {
+            background-color: #0056b3;
+        }
+
+        .upload-button {
+            background-color: #28a745;
+        }
+
+        .upload-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select a Bucket</h1>
+        <ul>
+            {% for bucket in bucket_list %}
+                <li>
+                    <span class="bucket-name">{{ bucket }}</span>
+                    <a href="{{ url_for('manage_bucket', bucket_name=bucket) }}" class="button manage-button">Manage</a>
+                    <a href="{{ url_for('upload_to_bucket', bucket_name=bucket) }}" class="button upload-button">Upload</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
