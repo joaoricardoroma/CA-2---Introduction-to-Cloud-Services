@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Scaling Groups</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        h1 {
+            color: #0f4c75;
+            text-align: center;
+            margin-bottom: 0.5em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        p {
+            color: #666;
+            text-align: center;
+        }
+        ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+        ul li {
+            list-style-type: disc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Auto Scaling Groups</h1>
+    <div class="container">
+        {% if auto_scaling_groups %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Auto Scaling Group Name</th>
+                        <th>Instances</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for asg in auto_scaling_groups %}
+                        <tr>
+                            <td>{{ asg.AutoScalingGroupName }}</td>
+                            <td>
+                                <ul>
+                                    {% for instance in asg.Instances %}
+                                        <li>{{ instance }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No auto scaling groups found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EC2 Instances</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        th.highlight {
+            background-color: black;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        p {
+            color: #666;
+            text-align: center;
+        }
+
+        td.highlight {
+            border: 2px solid black;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1>EC2 Instances</h1>
+{% if instances %}
+<table>
+    <thead>
+    <tr>
+        <th>Instance ID</th>
+        <th>Instance Type</th>
+        <th>Launch Time</th>
+        <th>State</th>
+        <th>Public IP Address</th>
+        <th class="highlight">Auto Scaling Group</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for instance in instances %}
+    <tr>
+        <td>{{ instance.InstanceId }}</td>
+        <td>{{ instance.InstanceType }}</td>
+        <td>{{ instance.LaunchTime }}</td>
+        <td>{{ instance.State }}</td>
+        <td>{{ instance.PublicIpAddress }}</td>
+        <td class="highlight">
+            <a href="{{ url_for('list_auto_scaling_groups', asg_name=instance.AutoScalingGroup) }}">
+                {{ instance.AutoScalingGroup }}
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{% endif %}
+<p>No running instances found.</p>
+</body>
+</html>
